@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Emoji Memory Card Game - Uji memori anda dengan memadankan emoji buah-buahan dalam grid 4x4.">
+    <title>Fruit Matcher 🍓 | Emoji Memory Game</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Game JS -->
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div id="app" class="app-container">
+        <!-- Background decorative blobs -->
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+
+        <!-- 1. LOBI PENDAFTARAN & LEADERBOARD -->
+        <section id="lobby-screen" class="screen active">
+            <header class="lobby-header">
+                <div class="logo">🍒</div>
+                <h1>Fruit Matcher</h1>
+                <p class="subtitle">Uji kepantasan dan kekuatan memori anda!</p>
+            </header>
+
+            <div class="lobby-content">
+                <!-- Form Pendaftaran -->
+                <div class="card-panel glass-panel register-panel">
+                    <h2>Mula Bermain</h2>
+                    <form id="register-form" onsubmit="return false;">
+                        <div class="input-group">
+                            <input type="text" id="username" placeholder=" " required maxlength="12" autocomplete="off">
+                            <label for="username">Nama Pemain</label>
+                            <span class="focus-border"></span>
+                        </div>
+                        <button type="submit" id="start-btn" class="btn btn-primary">
+                            <span>Mula Permainan</span>
+                            <span class="btn-icon">🚀</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Papan Pendahulu (Leaderboard) -->
+                <div class="card-panel glass-panel leaderboard-panel">
+                    <h2>🏆 Papan Pendahulu</h2>
+                    <div class="leaderboard-container">
+                        <table id="leaderboard-table">
+                            <thead>
+                                <tr>
+                                    <th class="rank-col">No</th>
+                                    <th>Pemain</th>
+                                    <th class="time-col">Masa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leaderboard-body">
+                                <!-- Data akan dimasukkan secara dinamik oleh JavaScript -->
+                                <tr class="empty-row">
+                                    <td colspan="3">Tiada rekod lagi. Jadilah yang pertama!</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SKRIN PERMAINAN (GAME SCREEN) -->
+        <section id="game-screen" class="screen">
+            <header class="game-header glass-panel">
+                <button id="back-to-lobby-btn" class="btn btn-secondary btn-sm" title="Kembali ke Lobi">
+                    <span>← Lobi</span>
+                </button>
+                <div class="player-info">
+                    <span class="label">Pemain:</span>
+                    <span id="display-username" class="value">-</span>
+                </div>
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <span class="stat-label">⏱️ Masa</span>
+                        <span id="game-timer" class="stat-value">00:00.0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">🧩 Padanan</span>
+                        <span id="game-matches" class="stat-value">0/8</span>
+                    </div>
+                </div>
+            </header>
+
+            <main class="game-main">
+                <!-- Grid Kad 4x4 -->
+                <div id="game-grid" class="game-grid">
+                    <!-- 16 kad akan dijana secara dinamik oleh JavaScript -->
+                </div>
+            </main>
+
+            <footer class="game-footer">
+                <button id="restart-btn" class="btn btn-secondary">
+                    <span>Set Semula</span>
+                    <span class="btn-icon">🔄</span>
+                </button>
+            </footer>
+        </section>
+
+        <!-- 3. MODAL KEMENANGAN (VICTORY MODAL) -->
+        <div id="victory-modal" class="modal-overlay">
+            <div class="modal-content glass-panel">
+                <div class="victory-icon">🎉</div>
+                <h2>Tahniah!</h2>
+                <p>Anda telah menyelesaikan padanan kad dengan jayanya!</p>
+                
+                <div class="victory-stats">
+                    <div class="v-stat">
+                        <span class="v-label">Nama</span>
+                        <span id="victory-name" class="v-value">-</span>
+                    </div>
+                    <div class="v-stat">
+                        <span class="v-label">Masa Selesai</span>
+                        <span id="victory-time" class="v-value">0.00s</span>
+                    </div>
+                    <div id="new-record-badge" class="new-record-badge hidden">
+                        ⚡ Rekod Baharu!
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button id="modal-play-again-btn" class="btn btn-primary">
+                        <span>Main Semula</span>
+                        <span class="btn-icon">🔄</span>
+                    </button>
+                    <button id="modal-lobby-btn" class="btn btn-secondary">
+                        <span>Kembali ke Lobi</span>
+                        <span class="btn-icon">🏠</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
